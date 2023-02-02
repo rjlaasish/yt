@@ -1,0 +1,98 @@
+:root {
+  --primary: #325ac9;
+  --secondary: #416fef;
+}
+
+button {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 52px;
+  width: 170px;
+  border: 0;
+  border-radius: 10px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  background: #416fef;
+  color: #f9f9f9;
+  cursor: pointer;
+}
+
+button > :is(span, svg) {
+  position: relative;
+  z-index: 3;
+}
+
+button::before,
+button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+button::before {
+  z-index: 1;
+  background: var(--primary)
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 10px,
+      var(--secondary) 10px,
+      var(--secondary) 20px
+    );
+}
+
+button::after {
+  z-index: 2;
+  background: linear-gradient(transparent, var(--secondary) 90%);
+}
+
+button.loading::before,
+button.loading::after {
+  opacity: 1;
+}
+
+button.loading::before {
+  animation: loading 0.7s infinite linear;
+}
+
+button.loading svg #line1 {
+  animation: expand 0.4s infinite linear;
+}
+
+button.loading svg #line2 {
+  animation: expand 0.6s infinite linear;
+}
+
+button.loading svg #line3 {
+  animation: expand 0.8s infinite linear;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(25px);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes toggle {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
